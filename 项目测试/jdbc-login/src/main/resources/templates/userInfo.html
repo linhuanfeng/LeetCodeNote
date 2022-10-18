@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>table1</title>
+</head>
+<body>
+<h1>你好</h1>
+<div th:if="${user != null}">
+    <div th:text="${user.username}"/>
+</div>
+<br/>
+<a th:href="@{/logout}">退出登录</a>
+<br/>
+</body>
+</html>
