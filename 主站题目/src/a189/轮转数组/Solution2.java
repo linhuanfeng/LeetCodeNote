@@ -4,7 +4,7 @@ package a189.轮转数组;
 /**
  * 使用额外的数组
  * 时间：O(n)每个元素被翻转两次，共n个数组
- * 空间:（1）
+ * 空间:（n）
  */
 class Solution2 {
     public void rotate(int[] nums, int k) {
