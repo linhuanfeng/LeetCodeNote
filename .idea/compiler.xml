@@ -13,6 +13,7 @@
         <module name="LeetcodeHot100" />
         <module name="dajiuye-swipper-service" />
         <module name="jdbc-login" />
+        <module name="java-base" />
         <module name="rabbitmq" />
         <module name="springboot" />
         <module name="netty" />

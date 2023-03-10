@@ -43,7 +43,7 @@ public class Main {
         // 初始化所有结点到r的距离，即到已有生成树的距离
         for (int l = 1; l < graph.length; l++) {
             if(l==r){
-                // 不计算当前节点，不过好像不用
+                // 不计算当前节点
                 continue;
             }
             lowCost[l]=graph[r][l];
@@ -54,21 +54,19 @@ public class Main {
             j=1;
             k=r; //记录哪个节点可以加入进来
             while (j<graph.length){
-                if(lowCost[j]!=0&&lowCost[j]<min){
-                    // 不在已有树中且小于已有权值
-                    // 找到当前生成树到外面的最小权值
-                    min=lowCost[j];
-                    k=j;
+                if(lowCost[j]!=0&&lowCost[j]<min){ // 不在已有树中且小于已有权值
+                    min=lowCost[j]; // 找到当前生成树到外面的最小权值
+                    k=j; // 记录距离已有生成树距离最短的节点
                 }
                 j++;
             }
-            ans+=min;
+            ans+=min; // 增加最小生成树的代价
             lowCost[k]=0; // 加入当前节点
             // 循环所有节点，更新外面节点到树的最小距离
             for (int m = 1; m <graph.length ; m++) {
                 if(lowCost[m]!=0&&graph[k][m]<lowCost[m]){
-                    lowCost[m]=graph[k][m];
-                    relativeVex[m]=k;
+                    lowCost[m]=graph[k][m]; // 更新到最小生成树的距离
+                    relativeVex[m]=k; // 离最小生成树最近相关节点
                 }
             }
         }

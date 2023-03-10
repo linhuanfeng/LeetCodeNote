@@ -15,7 +15,7 @@ public class HeapSort2 {
 
     // 构造小根堆
     public void build(int[] nums, int length) {
-        for (int i = length / 2 - 1; i >= 0; i--) {
+        for (int i = length / 2 - 1; i >= 0; i--) { // 从最后一个非叶子节点开始
             int parent = i; // 当前i作为父节点
             for (int k = 2 * parent + 1; k < length; k = k * 2 + 1) { // 递归和较小的子结点交换
                 if (k + 1 < length && nums[k + 1] < nums[k]) {
@@ -23,7 +23,7 @@ public class HeapSort2 {
                 }
                 if (nums[parent] > nums[k]) {
                     swap(nums, parent, k); // 子节点小于父节点，进行交换
-                    parent = k; // 以子节点作为父节点，遍历下一颗子树
+                    parent = k; // 以子节点作为新的父节点，遍历下一颗子树
                 } else {
                     break; // 子节点也满足小根堆，递归结束
                 }

@@ -3,44 +3,36 @@ package 剑指Offer31.栈的压入弹出序列;
 import java.util.LinkedList;
 
 /**
- * 输入：pushed = [1,2,3,4,5], popped = [4,5,3,2,1]
- * 输出：true
- * 解释：我们可以按以下顺序执行：
- * push(1), push(2), push(3), push(4), pop() -> 4,
- * push(5), pop() -> 5, pop() -> 3, pop() -> 2, pop() -> 1
- *
- * 时间复杂度：o(n)
- * 空间复杂度：0(n)
+ * 栈模拟+指针
+ * 时间：O(n) 每个元素最多进栈和出栈一次
+ * 空间：O(n) 栈的最大开销
  */
-class Solution {
+public class Solution {
     public boolean validateStackSequences(int[] pushed, int[] popped) {
-        if(pushed.length==0){
-            return true;
-        }
-        // 辅助队列 用来模拟出入栈，若栈为空则为true
         LinkedList<Integer> stack = new LinkedList<>();
-        int i=1,j=0;
-        stack.push(pushed[0]);
-        while (j<popped.length&&i<=pushed.length) {
-            //
-            if(!stack.isEmpty()&&stack.peek()==popped[j]){
-                // 防止空指针异常 integer==int 会调用intval报空指针异常
+        int n = pushed.length;
+        int i = 0, j = 0;
+        // i可以等于pushed.length，因为栈只要不为空就可以和popped继续匹配
+        while (i <= n && j < n) {
+            if (!stack.isEmpty() && stack.getLast() == popped[j]) { // 栈顶匹配成功，出栈
+                stack.removeLast();
                 j++;
-                stack.pop();
+            } else if(i==n){ // 栈顶匹配失败且入栈序列已用完，说明不是压入弹出序列
+                break;
             }else {
-                if(i==pushed.length){
-                    break;
-                }
-                stack.push(pushed[i++]);
+                stack.addLast(pushed[i++]); // 匹配失败，入栈尝试下一次匹配
             }
         }
-        return stack.isEmpty();
+        if (stack.isEmpty() && j == n) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public static void main(String[] args) {
-        int[] pushed = {1,0},
-                popped = {1,0};
-        Solution solution = new Solution();
-        System.out.println(solution.validateStackSequences(pushed, popped));
+        System.out.println(new Solution().validateStackSequences(
+                new int[]{1, 2, 3, 4, 5}, new int[]{4, 3,5,1,2}));
     }
 }
+
